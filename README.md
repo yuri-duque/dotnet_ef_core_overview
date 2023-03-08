@@ -13,11 +13,9 @@ dotnet new gitignore
 create a connection string on file `appsettings.json`
 
 ```json
-...
 "ConnectionStrings": {
     "Context": "Server=root@localhost:3306;Database=dotnet7overview;Uid=root;Pwd=123123;"
 }
-...
 ```
 
 get the connectionString on program.cs
