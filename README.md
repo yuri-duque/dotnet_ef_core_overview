@@ -1,5 +1,9 @@
 # MySql
 
+mysql Context : https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql
+
+EF Core get started : https://learn.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-7.0&tabs=visual-studio
+
 add .gitgnore
 
 ```csharp
