@@ -1,13 +1,21 @@
 ﻿using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 
 namespace Repository.Entities
 {
-    public class UserEntity : IUser
+    public class UserEntity : IBaseEntity, IUser
     {
         [Key]
         public string Id { get; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime CreatedDate { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? UpdatedDate { get; set; }
 
         [Required]
         public string Email { get; set; }
@@ -24,13 +32,16 @@ namespace Repository.Entities
         public UserEntity(string email, string name)
         {
             Id = Guid.NewGuid().ToString();
+            CreatedDate = DateTime.UtcNow;
             Email = email;
             Name = name;
         }
 
-        public UserEntity(string id, string email, string name)
+        public UserEntity(string id, DateTime createdDate, DateTime? updatedDate, string email, string name)
         {
             Id = id;
+            CreatedDate = createdDate;
+            UpdatedDate = updatedDate;
             Email = email;
             Name = name;
         }
