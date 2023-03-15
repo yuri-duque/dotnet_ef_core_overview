@@ -1,43 +1,45 @@
-﻿using Repository.Repositories;
+﻿using Domain.Entities;
+using Repository.Interfaces;
+using Service.Interfaces;
 
 namespace Service.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
-        private readonly UserRepository _productRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(UserRepository produtoRepository)
+        public UserService(IUserRepository userRepository)
         {
-            _productRepository = produtoRepository;
+            _userRepository = userRepository;
         }
 
-        public IList<Product> GetAll()
+        public async Task<IList<User>> GetAll()
         {
-            var products = _productRepository.GetAll();
+            var users = await _userRepository.GetAll();
 
-            return products.ToList();
+            return users.ToList();
         }
 
-        public object GetById(long id)
+        public async Task<User> FindById(string id)
         {
-            var product = _productRepository.Find(id);
+            var user = await _userRepository.FindById(id);
 
-            return product;
+            return user;
         }
 
-        public void Save(Product product)
+        public async Task Save(User user)
         {
-            _productRepository.Save(product);
+            await _userRepository.Save(user);
         }
 
-        public void Update(Product product)
+        public async Task Update(User user)
         {
-            _productRepository.Update(product);
+            await _userRepository.Update(user);
         }
 
-        public void Delete(long id)
+        public async Task Delete(string id)
         {
-            _productRepository.Delete(x => x.Id == id);
+            await _userRepository.Delete(id);
         }
     }
 }
