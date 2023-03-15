@@ -1,10 +1,18 @@
 ﻿using Repository.Context;
 using Repository.Entities;
+using Repository.Interfaces;
 
 namespace Repository.Repositories
 {
-    public class UserRepository : BaseRepository<UserEntity>
+    public class UserRepository : IUserRepository
     {
-        public UserRepository(BaseContext ctx) : base(ctx) { }
+        private BaseRepository<UserEntity> _repository;
+
+        public UserRepository(BaseContext ctx)
+        {
+            _repository = new BaseRepository<UserEntity>(ctx);
+        }
+
+
     }
 }

@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.Context;
+using Repository.Interfaces;
 
 namespace Repository.Repositories
 {
-    public abstract class BaseRepository<TEntity> : IDisposable, IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IDisposable, IBaseRepository<TEntity> where TEntity : class
     {
         private readonly BaseContext _ctx;
 
