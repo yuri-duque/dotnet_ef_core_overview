@@ -1,22 +1,32 @@
 using Repository.Context;
+using Repository.Interfaces;
+using Repository.Repositories;
+using Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton(provider => builder.Configuration);
-
 builder.Services.AddDbContext<BaseContext>();
-
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddControllers();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+#region Repository
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+#endregion
+
+#region Service
+
+builder.Services.AddScoped<UserService>();
+
+#endregion
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -25,19 +35,7 @@ if (app.Environment.IsDevelopment())
     app.UseMigrationsEndPoint();
 }
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-
-    var context = services.GetRequiredService<BaseContext>();
-
-    DbInitializer.Initialize(context);
-}
-
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
