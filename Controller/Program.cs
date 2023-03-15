@@ -1,7 +1,7 @@
+using Controller;
 using Repository.Context;
 using Repository.Interfaces;
 using Repository.Repositories;
-using Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAutoMapper(typeof(AutoMapping));
+
+
 #region Repository
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -21,7 +24,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 #region Service
 
-builder.Services.AddScoped<UserService>();
+//builder.Services.AddScoped<UserService>();
 
 #endregion
 
