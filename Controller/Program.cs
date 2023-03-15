@@ -3,9 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("Context");
-var serverVersion = new MySqlServerVersion(new Version(8, 0));
-builder.Services.AddDbContext<Context>(options => options.UseMySql(serverVersion));
+var connectionString = builder.Configuration.GetConnectionString("Default");
+
+builder.Services.AddDbContext<Context>(
+        options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -31,8 +32,8 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
 
     var context = services.GetRequiredService<Context>();
-    context.Database.EnsureCreated();
-    //DbInitializer.Initialize(context);
+
+    DbInitializer.Initialize(context);
 }
 
 app.UseHttpsRedirection();
