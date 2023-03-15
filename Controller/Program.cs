@@ -1,12 +1,10 @@
-using Controller.Repository;
-using Microsoft.EntityFrameworkCore;
+using Repository.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("Default");
+builder.Services.AddSingleton(provider => builder.Configuration);
 
-builder.Services.AddDbContext<Context>(
-        options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<BaseContext>();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -31,7 +29,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    var context = services.GetRequiredService<Context>();
+    var context = services.GetRequiredService<BaseContext>();
 
     DbInitializer.Initialize(context);
 }
