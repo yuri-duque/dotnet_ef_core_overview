@@ -4,6 +4,8 @@
     {
         public static void Initialize(Context context)
         {
+            context.Database.EnsureCreated();
+
             // Look for any students.
             if (context.Users.Any())
             {
@@ -20,6 +22,8 @@
 
             context.Users.AddRange(users);
             context.SaveChanges();
+
+
         }
     }
 }
