@@ -18,6 +18,11 @@ namespace Repository.Repositories
             _ctx.Dispose();
         }
 
+        public void Detached(TEntity obj)
+        {
+            _ctx.Entry(obj).State = EntityState.Detached;
+        }
+
         public IQueryable<TEntity> GetAll()
         {
             return _ctx.Set<TEntity>();
@@ -28,26 +33,21 @@ namespace Repository.Repositories
             return GetAll().Where(predicate).AsQueryable();
         }
 
-        public TEntity Find(params object[] key)
+        public async ValueTask<TEntity?> Find(params object[] key)
         {
-            return _ctx.Set<TEntity>().Find(key);
+            return await _ctx.Set<TEntity>().FindAsync(key);
         }
 
-        public void Detached(TEntity obj)
-        {
-            _ctx.Entry(obj).State = EntityState.Detached;
-        }
-
-        public void Update(TEntity obj)
+        public async Task Update(TEntity obj)
         {
             _ctx.Entry(obj).State = EntityState.Modified;
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
         }
 
-        public virtual void Save(TEntity obj)
+        public async Task Save(TEntity obj)
         {
             _ctx.Set<TEntity>().Add(obj);
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
         }
 
         public void SaveAll()
@@ -60,13 +60,13 @@ namespace Repository.Repositories
             _ctx.Set<TEntity>().Add(obj);
         }
 
-        public void Delete(Func<TEntity, bool> predicate)
+        public async Task Delete(Func<TEntity, bool> predicate)
         {
             _ctx.Set<TEntity>()
                 .Where(predicate).ToList()
                 .ForEach(del => _ctx.Set<TEntity>().Remove(del));
 
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
         }
     }
 }
