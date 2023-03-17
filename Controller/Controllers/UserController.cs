@@ -1,7 +1,7 @@
 using AutoMapper;
 using Controller.Dtos.User;
 using Microsoft.AspNetCore.Mvc;
-using Repository.Interfaces;
+using Repository.Repositories.Interfaces;
 
 namespace Controller.Controllers
 {

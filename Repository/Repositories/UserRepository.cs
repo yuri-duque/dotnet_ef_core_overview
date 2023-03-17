@@ -3,7 +3,7 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Repository.Context;
 using Repository.Entities;
-using Repository.Interfaces;
+using Repository.Repositories.Interfaces;
 
 namespace Repository.Repositories
 {
