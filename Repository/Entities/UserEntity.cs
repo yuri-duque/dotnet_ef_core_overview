@@ -1,4 +1,4 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
