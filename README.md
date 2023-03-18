@@ -1,6 +1,3 @@
-
-
-
 # Clean Architecture - Entity Framework
 
 In this document we will see how to create a simple clean architecture with .Net 7 and Entity Framework.
@@ -29,17 +26,38 @@ The Controller layer is the conductor of operations for a request. It controls t
 
 This Layer already have created when we created a web API project.
 
+project references:
+ - [x] Service
+ - [x] Domain
+ - [ ] Repository
 
 ### Service
 The Service layer is responsible to have all business rules, it is enabled to comunicate with all other layers
 
+project references:
+ - [ ] Controller
+ - [x] Domain
+ - [x] Repository
 
 ### Domain
 The Domain layer is responsible to have all models for the project, it is the way to convert the DTOs from the controller and Database to use in the service layer
 
+project references:
+ - [ ] Controller
+ - [ ] Service
+ - [ ] Repository
+
 
 ### Repository
 The Repository layer is responsible to communicate the application to the database, this layer is accessible only in the Service layer.
+
+project references:
+ - [ ] Controller
+ - [ ] Service
+ - [x] Domain
+
+
+## 
 
 
 # MySql
