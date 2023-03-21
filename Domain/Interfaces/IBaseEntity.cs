@@ -1,4 +1,4 @@
-﻿namespace Domain.Models.Interfaces
+﻿namespace Domain.Interfaces
 {
     public interface IBaseEntity
     {

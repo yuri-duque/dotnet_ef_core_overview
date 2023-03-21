@@ -1,4 +1,4 @@
-﻿using Domain.Models.Interfaces;
+﻿using Domain.Interfaces;
 
 namespace Controller.Dtos.User
 {
