@@ -2,7 +2,7 @@
 using Service.Services;
 using Service.Services.Interfaces;
 
-namespace Service
+namespace Service.Ioc
 {
     public static class ServiceIoc
     {
